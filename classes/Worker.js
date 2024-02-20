@@ -1,23 +1,17 @@
 const Database = require('./Database');
 
 class Worker {
-
-    constructor(name, coef) {
-        this.name = name,
-        this.coef = coef
+    constructor(name) {
+        this.name = name
     }
-    async name(name) {
+    async Name(name) {
         if(name == null) console.log(this.name);
         else this.name = name;
-    }
-    async coef(coef) {
-        if(coef == null) console.log(this.coef);
-        else this.coef = coef;
     }
     
     async addWorkerToDB() {
         const db = new Database();
-        await db.doQuery(`insert into workers (name, coef) values ("${this.name}", "${this.coef}")`);
+        await db.doQuery(`insert into workers (name, coef) values ("${this.name}", 100)`);
     }
 
 }
