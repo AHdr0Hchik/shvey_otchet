@@ -36,7 +36,6 @@ class DayStats {
             this.workersArr[i].proizved = averageProizv * this.workersArr[i].coef / 100;
             sum += this.workersArr[i].proizved;
             if(this.workersArr[i].coef < 100) studentsCount += 1;
-            this.workersArr[i].proizved = this.workersArr[i].proizved;
         }
 
         //Второй просчёт, исключая стажёров
@@ -47,7 +46,7 @@ class DayStats {
                 continue;
             } else {
                 this.workersArr[i].proizved += averageOstatok;
-                this.workersArr[i].proizved = this.workersArr[i].proizved.toFixed(4);
+                this.workersArr[i].proizved = parseFloat(this.workersArr[i].proizved.toFixed(4));
                 
             }
         }
@@ -58,9 +57,14 @@ class DayStats {
             workersArrMin[i]={"id": this.workersArr[i].id, "proizved":this.workersArr[i].proizved};
         }
         const workersArrJSON = JSON.stringify(workersArrMin);
-        db.doQuery(`INSERT INTO history (date, arrWorkers, proizved) values ("${this.date}", '${workersArrJSON}', ${this.proizved});`);
-        
+        const [isExist] = await db.connection.promise().query(`SELECT * FROM HISTORY WHERE date="${this.date}"`);
+        if(isExist.length==0) {db.doQuery(`INSERT INTO history (date, arrWorkers, proizved) values ("${this.date}", '${workersArrJSON}', ${this.proizved});`);}
+        else {db.doQuery(`UPDATE history SET arrWorkers='${workersArrJSON}', proizved="${this.proizved}" WHERE date="${this.date}";`);}
+        //await db.getTableDataJSON("history", "history");
+
     }
+
+    
 }
 module.exports = DayStats;
 

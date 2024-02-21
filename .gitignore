@@ -3,3 +3,4 @@ gitignored/
 /node_modules
 /package.json
 /package-lock.json
+/public/json

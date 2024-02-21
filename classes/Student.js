@@ -1,6 +1,10 @@
+const Worker = require("./Worker");
+const Database = require('./Database');
+
 class Student extends Worker {
-    constructor() {
-        this.coef;
+    constructor(name, coef) {
+        super(name),
+        this.coef = coef
     }
     db = new Database();
 
@@ -10,10 +14,11 @@ class Student extends Worker {
     }
 
     async addStudentToDB() {
-        await db.doQuery(`insert into workers (name, coef) values ("${this.name}", ${this.coef})`);
+        await this.db.doQuery(`insert into workers (name, coef) values ("${this.name}", ${this.coef})`);
     }
     
     async updateCoef() {
-        await db.doQuery(`update workers set coef=${this.coef} where name=${this.name}`);
+        await this.db.doQuery(`update workers set coef=${this.coef} where name=${this.name}`);
     }
 }
+module.exports=Student;

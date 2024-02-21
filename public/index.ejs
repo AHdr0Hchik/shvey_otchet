@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/style.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <title>Расчёт зарплаты</title>
+</head>
+
+<body>
+    <div class="container">
+        <table width="auto" border="1" id="userdata" class="table-bordered">
+        </table>
+    
+        <button class="btn btn_add_column" id="btn_add_column">+</button>
+        <button class="btn btn_add_column" id="btn_remove_column">-</button>
+        <button class="btn btn_add_column" onclick="countCheckedCells()">=</button>
+    </div>
+    
+    
+    <script src="/js/tableGenerator2.js"></script>
+    <script src="/js/dataHandler.js"></script>
+</body>
+</html>

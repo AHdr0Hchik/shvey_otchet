@@ -1,0 +1,20 @@
+.container {
+    margin: 0;
+    display: inline-block;
+    text-align: right;
+    display: flex;
+    padding-top: 50px;
+}
+.btn_add_column {
+    display: block;
+    margin-left: 10px;
+	justify-content: center;
+    background-color: rgba(92, 146, 255, 0.522);
+}
+table{
+    width: auto;
+}
+.proizved{
+    display: inline;
+    margin-right: 30px;
+}

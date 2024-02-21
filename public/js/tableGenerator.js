@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
   var table = document.getElementById("myTable");
 
@@ -14,5 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }
 
       table.appendChild(row);
+      console.log('yes!!!');
   }
 });
