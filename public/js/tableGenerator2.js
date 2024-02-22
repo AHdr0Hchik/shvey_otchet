@@ -3,7 +3,7 @@ $(function() {
         const tblHeader = `<tr><td>№</td><td>Имя работника</td><td class="coef">Коэффициент</td></tr>`;
         $(tblHeader).appendTo('#userdata');
         $.each(data, function(i, f) {
-            const tblRow = `<tr><td>${f.id}</td><td>${f.name}</td><td width="50px"><input type="number" class="coef" value="${f.coef}"/></td></tr>`;
+            const tblRow = `<tr><td><button id="removeWorker" onclick="removeWorker(${f.id})">-</button><span>${f.id}</span></td><td>${f.name}</td><td width="50px"><input type="number" class="coef" value="${f.coef}"/></td></tr>`;
             $(tblRow).appendTo("#userdata");
         });
         const tblAddWorker = `<tr><td><button class="btn btn-add-worker" onclick="addWorker()" name="addWorkerBtn">+</button></td><td><input type="text" placeholder="Введите имя..." id="addWorkerName"></td><td><input type="number" class="coef" id="addWorkerCoef" placeholder="Введите процент..." value=""/></td></tr>`

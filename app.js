@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const Database = require("./classes/Database");
 const DayStats = require("./classes/DayStats");
 const Student = require("./classes/Student");
+const Worker = require("./classes/Worker");
 const fs = require('fs');
 
 
@@ -107,5 +108,12 @@ app.post('/addWorker', async function (req, res) {
    nWorker.Name(req.body.name);
    nWorker.Coef(req.body.coef);
    nWorker.addStudentToDB();
+   res.redirect("/");
+});
+app.post('/removeWorker', async function (req, res) {
+   console.log(req.body);
+   var nWorker = new Worker();
+   await nWorker.Id(req.body.id);
+   await nWorker.removeWorkerFromDB();
    res.redirect("/");
 });

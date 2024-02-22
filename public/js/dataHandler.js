@@ -13,7 +13,7 @@ function countCheckedCells() {
         for (var i = 1; i < rowCount; i++) {
             var cell = table.rows[i].cells[j];
             var checkbox = cell.querySelector('input[type="checkbox"]');
-            var idCell = parseInt(table.rows[i].cells[0].innerText);
+            var idCell = parseInt(table.rows[i].cells[0].lastChild.innerText);
             var valueCell = table.rows[i].cells[1].innerText; // Значение из второго столбца
             var coefCell = parseInt(table.rows[i].cells[2].firstChild.value); // Значение из второго столбца
             
@@ -89,6 +89,21 @@ function addWorker() {
         }
     }).then((response) => response.json())
     .then((json) => console.log(json));
+
+}
+
+function removeWorker(id) {
+    fetch("/removeWorker", {
+        method: "POST",
+        body: JSON.stringify(
+            {
+                "id": id
+            }
+        ),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    }).then((response) => response.json())
 
 }
 
