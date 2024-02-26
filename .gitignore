@@ -4,3 +4,4 @@ gitignored/
 /package.json
 /package-lock.json
 /public/json
+/output24.xlsx

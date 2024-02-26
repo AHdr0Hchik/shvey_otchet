@@ -6,6 +6,7 @@ const DayStats = require("./classes/DayStats");
 const Student = require("./classes/Student");
 const Worker = require("./classes/Worker");
 const fs = require('fs');
+const ExcelExporter = require('./classes/ExcelExporter');
 
 
 const db = new Database();
@@ -69,6 +70,7 @@ app.get('/', async (req, res) => {
 app.post('/dataHandler', async function (req, res) {
    let dayStatsArr = [];
    for(let i = 0; i<req.body.length; i++) {
+      console.log(req.body);
       const dayStat = new DayStats(req.body[i][0].value);
       let workers = [];
 
@@ -80,7 +82,6 @@ app.post('/dataHandler', async function (req, res) {
       }
       dayStat.WorkersArr(workers);
       dayStat.generateDayStat();
-      console.log(dayStat);
 
       dayStatsArr.push(dayStat);
    }
@@ -111,9 +112,14 @@ app.post('/addWorker', async function (req, res) {
    res.redirect("/");
 });
 app.post('/removeWorker', async function (req, res) {
-   console.log(req.body);
    var nWorker = new Worker();
    await nWorker.Id(req.body.id);
    await nWorker.removeWorkerFromDB();
    res.redirect("/");
+});
+app.post('/excelExport', async function (req, res) {
+   var Excel = new ExcelExporter;
+   console.log(req.body);
+   //console.log(req.body[0][Object.keys(req.body[0])[0]]);
+   await Excel.createWorksheet(`Журнал за ${req.body[2][0]}-${req.body[req.body.length-1][0]}`,req.body.length, 50, req.body);
 });

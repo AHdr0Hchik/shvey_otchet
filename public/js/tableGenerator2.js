@@ -1,13 +1,13 @@
 $(function() {
     $.getJSON('../json/workers.json', function(data) {
-        const tblHeader = `<tr><td>№</td><td>Имя работника</td><td class="coef">Коэффициент</td></tr>`;
+        const tblHeader = `<tr><td>№</td><td>Имя работника</td><td class="coef">Коэффициент</td><td>Произведено всего</td></tr>`;
         $(tblHeader).appendTo('#userdata');
         $.each(data, function(i, f) {
-            const tblRow = `<tr><td><button id="removeWorker" onclick="removeWorker(${f.id})">-</button><span>${f.id}</span></td><td>${f.name}</td><td width="50px"><input type="number" class="coef" value="${f.coef}"/></td></tr>`;
+            const tblRow = `<tr><td><button id="removeWorker" onclick="removeWorker(${f.id})">-</button><span>${f.id}</span></td><td>${f.name}</td><td width="50px"><input type="number" class="coef" value="${f.coef}"/></td><td>0</td</tr>`;
             $(tblRow).appendTo("#userdata");
         });
-        const tblAddWorker = `<tr><td><button class="btn btn-add-worker" onclick="addWorker()" name="addWorkerBtn">+</button></td><td><input type="text" placeholder="Введите имя..." id="addWorkerName"></td><td><input type="number" class="coef" id="addWorkerCoef" placeholder="Введите процент..." value=""/></td></tr>`
-        const tblFooter = `<tr><td>-</td><td>Произведено</td><td>----</td></tr>`;
+        const tblAddWorker = `<tr><td><button class="btn btn-add-worker" onclick="addWorker()" name="addWorkerBtn">+</button></td><td><input type="text" placeholder="Введите имя..." id="addWorkerName"></td><td><input type="number" class="coef" id="addWorkerCoef" placeholder="Введите процент..." value=""/></td><td></td</tr>`
+        const tblFooter = `<tr><td>-</td><td>Произведено</td><td>----</td><td>0</td></tr>`;
         $(tblAddWorker).appendTo("#userdata");
         $(tblFooter).appendTo("#userdata");
     });
@@ -18,23 +18,23 @@ $(function() {
     iter = 0;
 
     $('#btn_add_column').click(function () {
-        myform.find('tr').each(function(iter){
+            myform.find('tr').each(function(iter){
             var trow = $(this);
-            if(trow.index() === 0){
-                var prevCellValue = trow.find('td:last-child input[type="date"]').val();
-                var incrementedValue = getNextDateValue(prevCellValue);
-                trow.append(`<td><input type="date" value="${incrementedValue}" name="date${iter}"/></td>`);
-            }else{
-                if(iter===$('#userdata tr').length-1) {
+                if(trow.index() === 0){
+                    var prevCellValue = trow.find('td:last-child input[type="date"]').val();
+                    var incrementedValue = getNextDateValue(prevCellValue);
+                    trow.append(`<td><input type="date" value="${incrementedValue}" name="date${iter}"/></td>`);
+                }else{
+                    if(iter===$('#userdata tr').length-1) {
                     trow.append('<td><input type="number" name="count'+iter+'"/></td>');
-                } else if(iter===$('#userdata tr').length-2) {
+                    } else if(iter===$('#userdata tr').length-2) {
                     trow.append('<td><div></div></td>');
-                } else {
-                    trow.append('<td><div class="proizved">-</div><input onclick="" type="checkbox" name="'+ parseInt(iter) +'" checked/>&nbsp;</td>');
+                    } else {
+                    trow.append('<td><div class="proizved">-</div><input onclick="" type="checkbox" name="'+ parseInt(iter) +'" checked/> </td>');
+                    }
                 }
-            }
+            });
         });
-    });
     
     function getNextDateValue(dateString) {
         var currentDate = new Date(dateString);

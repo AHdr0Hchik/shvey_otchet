@@ -1,17 +1,22 @@
 const Database = require('./Database');
 
 class Worker {
-    constructor(name, id) {
+    constructor(name, id, countWDays) {
         this.id = id,
-        this.name = name
+        this.name = name,
+        this.countWDays = countWDays
     }
     async Name(name) {
-        if(name == null) console.log(this.name);
+        if(!name) console.log(this.name);
         else this.name = name;
     }
     async Id(id) {
-        if(id == null) console.log(this.id);
+        if(!id) console.log(this.id);
         else this.id = id;
+    }
+    async CountWDays(countWDays) {
+        if(!countWDays) console.log(this.countWDays);
+        else this.countWDays = countWDays;
     }
     
     async addWorkerToDB() {
